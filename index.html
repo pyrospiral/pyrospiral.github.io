@@ -1,4 +1,96 @@
-Hello World
-<br>
-<br>
-<a href="https://pyrospiral.wordpress.com/">Site coming soon. Click here for blog.</a>
+<!DOCTYPE html5>
+<html>
+
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<style>
+
+	@font-face
+	{
+	font-family: QL;
+	src: url(QL.otf) format("opentype");
+	}
+	
+	#container{
+		margin-top:50px;
+	}
+
+	.row{
+		width:330px;
+		height:100px;
+		margin:5px;
+		margin:auto;
+	}
+	
+	.box{
+		background-color:#c0392b;
+		color:#e74c3c;
+		width:90px;
+		height:90px;
+		border-radius:3px;
+		float:left;
+		margin:5px;
+		text-align:center;
+		font-size:75px;
+	}
+	
+	#text{
+		margin:auto;
+		margin-top:40px;
+		padding:15px;
+		font-family:QL;
+		text-align:center;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="container">
+
+	<div id="row1" class="row">
+		<div id="box11" onclick="setValue(id)" class="box">
+		
+		</div>
+		<div id="box12" onclick="setValue(id)" class="box">
+		
+		</div>
+		<div id="box13" onclick="setValue(id)" class="box">
+		</div>
+	
+	</div>
+	
+	<div id="row2" class="row">
+	
+		<div id="box21" onclick="setValue(id)" class="box">
+		</div>
+		<div id="box22" onclick="setValue(id)" class="box">
+		</div>
+		<div id="box23" onclick="setValue(id)" class="box">
+		</div>
+	</div>
+	
+	<div id="row3" class="row">
+	
+		<div id="box31" onclick="setValue(id)" class="box">
+		</div>
+		<div id="box32" onclick="setValue(id)" class="box">
+		</div>
+		<div id="box33"onclick="setValue(id)" class="box">
+		</div>
+	</div>
+	
+	<p id="text"></p>
+
+</div>
+
+<script src="part2.js"></script>
+
+</body>
+
+
+
+</html>
