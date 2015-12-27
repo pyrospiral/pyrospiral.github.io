@@ -261,8 +261,32 @@ class PyroBatchIterator(BatchIterator):
 				<br><br>
 				On running the network, following was the progression of validation and training loss.
 				<br><br>
+				<pre class="code">
+Epoch  |  Train loss  |  Valid loss  |  Train / Val
+--------|--------------|--------------|----------------
+     1  |    0.111763  |    0.042740  |     2.614934
+     2  |    0.018500  |    0.009413  |     1.965295
+     3  |    0.008598  |    0.007918  |     1.085823
+     4  |    0.007292  |    0.007284  |     1.001139
+     5  |    0.006783  |    0.006841  |     0.991525
+...
+   500  |    0.001791  |    0.002013  |     0.889810
+   501  |    0.001789  |    0.002011  |     0.889433
+   502  |    0.001786  |    0.002009  |     0.889044
+   503  |    0.001783  |    0.002007  |     0.888534
+   504  |    0.001780  |    0.002004  |     0.888095
+   505  |    0.001777  |    0.002002  |     0.887699
+...
+   995  |    0.001083  |    0.001568  |     0.690497
+   996  |    0.001082  |    0.001567  |     0.690216
+   997  |    0.001081  |    0.001567  |     0.689867
+   998  |    0.001080  |    0.001567  |     0.689595
+   999  |    0.001080  |    0.001567  |     0.689089
+  1000  |    0.001079  |    0.001566  |     0.688874
+				</pre>
 				The variation of losses though the epochs is shown in the graph below.
 				<br><br>
+				<img src="https://raw.githubusercontent.com/pyrospiral/pyrospiral.github.io/master/images/losses.PNG"></img>
 			</p>
 			
 			</div>
