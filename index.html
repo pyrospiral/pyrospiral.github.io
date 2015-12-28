@@ -217,6 +217,8 @@ eval_size = 0.2
 			
 				Here we define the input layer, the hidden layer and the output layer. In parameter layers, we name and specify the type of each layer, and their order. Parameters input_shape, hidden_num_units, output_nonlinearity, and output_num_units are each parameters for specific layers; they refer to the layer by their prefix, such that input_shape defines the shape parameter of the input layer, hidden_num_units defines the hidden layer's num_units and so on. <br><br>
 				
+				Since our problem deals with classification, we set regression to false and use softmax as the non-linearity function. The update_learning_rate should be remembered to kept small if the number of faces to classify is fairly small as the gradient descent can easily overshoot, the update_momentum is also kept at a moderate value, but increasing it can lead to faster learning. The eval_size specifies the fraction of data that will be utilized for cross validation, in our case it is 20%.<br><br>
+					
 				In our initialization of the network we didn't specify an objective function to minimize. The default for that is the cross-entropy loss fucntion, but can be explicitly specified as a function. We have not used the <b>triplet error</b> specified in the paper due to reasons specified later on.<br><br>
 				
 				batch_iterator_train can be set to a custom iterator function which can feed data as specified by the batch iteration function.<br>
