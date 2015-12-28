@@ -158,8 +158,8 @@
 			<div class="contentblock">
 			
 			<p class="contenttext">
-				 The implementation is done in python using the <b>nolearn</b> library which is a thin wrapper over the library <b>lasagne</b> which forther extends as a wrapper over <b>theano</b>.
-				 <br>Lasagne.nolearn offers an optimization thorugh fast C compilation and is magnitudes faster than other python implementations. It also <b>supports CUDA</b> without any change in code for GPU usage.
+				 The implementation is done in python using the <b>nolearn</b> library which is a thin wrapper over the library <b>lasagne</b> which further extends as a wrapper over <b>theano</b>.
+				 <br>Lasagne.nolearn offers an optimization through fast C compilation and is magnitudes faster than other python implementations. It also <b>supports CUDA</b> without any change in code for GPU usage.
 				 
 			</p>
 			
@@ -201,15 +201,15 @@ hidden4_num_units=1000,
 dropout4_p=0.5,
 
 hidden5_num_units=1000,
-output_num_units=2,
+output_num_units=1000,
 output_nonlinearity=nonlinearities.softmax,
 
-update_learning_rate=theano.shared(float32(0.01)),
+update_learning_rate=theano.shared(float32(0.05)),
 update_momentum=theano.shared(float32(0.4)),
 
 regression=False,
-batch_iterator_train=PyroBatchIterator(batch_size=2),
-max_epochs=10,
+batch_iterator_train=PyroBatchIterator(batch_size=50),
+max_epochs=200,
 verbose=1,
 eval_size = 0.2
 )				
@@ -259,7 +259,7 @@ class PyroBatchIterator(BatchIterator):
 			
 			<p class="contenttext">
 				 
-				The code implementation was scaled down to a limited dataset size of 1000 images only and the network was also made shallower due to reasons explained in the next section. With these constraints the network showed a final validation accuracy value of <b>92%</b>.
+				The code implementation was scaled down to a limited dataset size of 1000 images and the network was also made shallower due to reasons explained in the next section. With these constraints the network showed a final validation accuracy value of <b>92%</b>.
 				<br><br>
 				On running the network, following was the progression of validation and training loss.
 				<br><br>
@@ -303,12 +303,12 @@ class PyroBatchIterator(BatchIterator):
 			
 			<p class="contenttext">
 				 
-				The implementation in the paper is aided by a good hardware setup including 4 GPUs which can handle a much larger dataset and reduce training time by a whole magnitude. Despite 10 hours of run time, our network could not iterate though more than 150 epochs which is insufficient for proper learning at the given scale. Due to memory constraints, the network also had to be made shallower further depreciating the accuracy.
-				<br><br>The architecutre in the paper involves an ensemble of networks working together instead of a single network, and also uses the triplet loss method which requires a siamese network or an extension of it. The utilization of this loss function also provided a boost to the paper's network accuracy.
+				The implementation in the paper is aided by a good hardware setup including 4 GPUs which can handle a much larger dataset and reduce training time by a whole magnitude. Despite 10 hours of run time, our network could not iterate though more than 150 epochs which is insufficient for proper learning at the given scale. Due to memory constraints, the network also had to be made shallower, further depreciating the accuracy.
+				<br><br>The architecutre in the paper involves an ensemble of networks working together instead of a single network, and also uses the triplet loss method which requires a <b>siamese network</b> or an extension of it. The utilization of this loss function also provided a boost to the paper's network accuracy.
 				
 				<br><br>
 				For the reasons above, stronger hardware support would greately improve the network strength and due to the use of nolearn library, this would require no change in the code itself. <br>
-				Aside from this, the paper mentions no measure to tackle overfitting other than l2 regularization. Our network also employs dropout layers in the network which are increasing essential for larger scale networks.
+				Aside from this, the paper mentions no measure to tackle overfitting other than l2 regularization. Our network also employs dropout layers in the network which are increasing essential for larger scale networks for reducting overfitting.
 			
 			</p>
 			
