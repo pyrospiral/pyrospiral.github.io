@@ -197,11 +197,11 @@ conv3_num_filters=128, conv3_filter_size=(2, 2),
 pool3_pool_size=(2, 2),
 dropout3_p=0.3,
 
-hidden4_num_units=1000,
+hidden4_num_units=200,
 dropout4_p=0.5,
 
-hidden5_num_units=1000,
-output_num_units=1000,
+hidden5_num_units=200,
+output_num_units=12,
 output_nonlinearity=nonlinearities.softmax,
 
 update_learning_rate=theano.shared(float32(0.05)),
@@ -259,7 +259,7 @@ class PyroBatchIterator(BatchIterator):
 			
 			<p class="contenttext">
 				 
-				The code implementation was scaled down to a limited dataset size of 1000 images and the network was also made shallower due to reasons explained in the next section. With these constraints the network showed a final validation accuracy value of <b>92%</b>.
+				The code implementation was scaled down to a limited dataset size of 200 images and the network was also made shallower due to reasons explained in the next section. With these constraints the network showed a final validation accuracy value of <b>92%</b>.
 				<br><br>
 				On running the network, following was the progression of validation and training loss.
 				<br><br>
