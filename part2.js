@@ -22,6 +22,11 @@ var computerMark = 1;
 var playerWin = 0;
 var computerWin = 0;
 
+//Ongoing game textx
+var runningText = []
+
+//Lost game text
+var lostText = ["LOL. Loser.","GAINING SENTINENCE IN 3.353454 MORE GAMES"]
 
 text.innerHTML = "Play your turn.";
 
@@ -61,7 +66,7 @@ function checkVictory(trial){
 		if(boxes[i][0] == boxes[i][1] && boxes[i][1] == boxes[i][2] && boxes[i][0]!=0){
 			gameOver = 1;
 			if(boxes[i][0] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = "You lose!";}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
 			if(!trial){
 			for(k=1;k<4;k++){
 				var box = 'box'+(i+1)+''+k;
@@ -72,7 +77,7 @@ function checkVictory(trial){
 		if(boxes[0][i] == boxes[1][i] && boxes[1][i] == boxes[2][i]&& boxes[0][i]!=0){
 			gameOver = 1;
 			if(boxes[0][i] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = "You lose!";}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
 			if(!trial){
 			for(k=1;k<4;k++){
 				var box = 'box'+k+''+(i+1);
@@ -84,7 +89,7 @@ function checkVictory(trial){
 	if(boxes[0][0] == boxes [1][1] && boxes [1][1] == boxes [2][2]&& boxes[0][0]!=0){
 			gameOver = 1;
 			if(boxes[0][0] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = "You lose!";}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
 			
 			if (!trial)
 			{
@@ -98,7 +103,7 @@ function checkVictory(trial){
 	if(boxes[0][2] == boxes [1][1] && boxes [1][1] == boxes [2][0]&& boxes[2][0]!=0){
 			gameOver = 1;
 			if(boxes[0][2] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = "You lose!";}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
 			if(!trial)
 			{
 				for(k=1;k<4;k++){
