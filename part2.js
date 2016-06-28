@@ -26,7 +26,7 @@ var computerWin = 0;
 var runningText = []
 
 //Lost game text
-var lostText = ["LOL. Loser.","GAINING SENTINENCE IN 3.353454 MORE GAMES"]
+var lostText = ["LOL. Loser.","GAINING SENTINENCE IN 3.353454 MORE GAMES","A walnut could do better.","You're losing your job to us next.","Come on dude, it's not like I have an unwinnable algorithm running in the back.","Download complete."]
 
 text.innerHTML = "Play your turn.";
 
