@@ -4,6 +4,7 @@
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
+<link rel="stylesheet" type="text/css" href="shake.css"> 
 <style>
 
 	@font-face
@@ -17,10 +18,11 @@
 	}
 
 	.row{
-		width:330px;
+		width:690px;
 		height:100px;
 		margin:5px;
 		margin:auto;
+		padding-left:390px;
 	}
 	
 	.box{
@@ -42,6 +44,14 @@
 		font-family:QL;
 		text-align:center;
 	}
+	#reloadtext{
+		margin:auto;
+		margin-top:15px;
+		padding:15px;
+		font-family:QL;
+		text-align:center;
+		cursor: pointer;
+	}
 	
 	#linktext{
 		margin:auto;
@@ -61,12 +71,20 @@
 		color:green;
 		text-decoration:none;
 	}
+	
+	#box231{
+		background-color:#fafefe;
+		margin-left:100px;
+	}
 
+	#reloadtext{
+		visibility:hidden;
+	}
 </style>
 
 </head>
 
-<body>
+<body id="body">
 
 <div id="container">
 
@@ -90,6 +108,8 @@
 		</div>
 		<div id="box23" onclick="setValue(id)" class="box">
 		</div>
+		<div id="box231" onclick="hurt(id)" class="box">
+		</div>
 	</div>
 	
 	<div id="row3" class="row">
@@ -102,7 +122,8 @@
 		</div>
 	</div>
 	
-	<p id="text"></p>
+	<p id="text" ></p>
+	<p id="reloadtext" onclick="textclick(id)">Reload?</p>
 
 	<p id="linktext"><a href="https://pyrospiral.wordpress.com/">Go to blog.</a></p>
 	
