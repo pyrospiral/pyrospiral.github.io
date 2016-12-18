@@ -7,7 +7,12 @@ box23 =  document.getElementById("box23");
 box31 =  document.getElementById("box31");
 box32 =  document.getElementById("box32");
 box33 =  document.getElementById("box33");
+bbox =  document.getElementById("box231");
+container = document.getElementById("container");
 text = document.getElementById("text");
+body = document.getElementById("body");
+reloadtext = document.getElementById("reloadtext");
+
 
 //Board Variables
 var boxes = [[0,0,0],[0,0,0],[0,0,0]];
@@ -22,11 +27,10 @@ var computerMark = 1;
 var playerWin = 0;
 var computerWin = 0;
 
-//Ongoing game textx
-var runningText = []
+//Extra Variables
+var hurtcount = 0;
+var lostText = ["LOL. Loser.","GAINING SENTINENCE IN 3.353454 MORE GAMES","A walnut could do better.","You're losing your job to us next.","Come on dude, it's not like I have an unwinnable algorithm running in the back.","Download complete."];
 
-//Lost game text
-var lostText = ["LOL. Loser.","GAINING SENTINENCE IN 3.353454 MORE GAMES","A walnut could do better.","You're losing your job to us next.","Come on dude, it's not like I have an unwinnable algorithm running in the back.","Download complete."]
 
 text.innerHTML = "Play your turn.";
 
@@ -66,10 +70,11 @@ function checkVictory(trial){
 		if(boxes[i][0] == boxes[i][1] && boxes[i][1] == boxes[i][2] && boxes[i][0]!=0){
 			gameOver = 1;
 			if(boxes[i][0] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
+			else{computerWin = 1;  text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)]; }
 			if(!trial){
 			for(k=1;k<4;k++){
 				var box = 'box'+(i+1)+''+k;
+				reloadtext.style.visibility ="visible";
 				document.getElementById(box).style.background = '#342584';
 			}}
 		}
@@ -77,10 +82,11 @@ function checkVictory(trial){
 		if(boxes[0][i] == boxes[1][i] && boxes[1][i] == boxes[2][i]&& boxes[0][i]!=0){
 			gameOver = 1;
 			if(boxes[0][i] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)]; }
 			if(!trial){
 			for(k=1;k<4;k++){
 				var box = 'box'+k+''+(i+1);
+				reloadtext.style.visibility ="visible";
 				document.getElementById(box).style.background = '#342584';
 			}}
 		}
@@ -89,12 +95,13 @@ function checkVictory(trial){
 	if(boxes[0][0] == boxes [1][1] && boxes [1][1] == boxes [2][2]&& boxes[0][0]!=0){
 			gameOver = 1;
 			if(boxes[0][0] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)]; }
 			
 			if (!trial)
 			{
 				for(k=1;k<4;k++){
 					var box = 'box'+k+''+k;
+				reloadtext.style.visibility ="visible";
 					document.getElementById(box).style.background = '#342584';
 				}	
 			}
@@ -103,11 +110,12 @@ function checkVictory(trial){
 	if(boxes[0][2] == boxes [1][1] && boxes [1][1] == boxes [2][0]&& boxes[2][0]!=0){
 			gameOver = 1;
 			if(boxes[0][2] == playerMark){ playerWin = 1; text.innerHTML = "You win!";}
-			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)];}
+			else{computerWin = 1; text.innerHTML = lostText[Math.floor(Math.random()*lostText.length)]; }
 			if(!trial)
 			{
 				for(k=1;k<4;k++){
 					var box = 'box'+k+''+(4-k);
+				reloadtext.style.visibility ="visible";
 					document.getElementById(box).style.background = '#342584';
 				}
 			}
@@ -277,9 +285,38 @@ function getBestMove(mark,depth){
 	return score;
 }
 
+function hurt(box){
+	hurtcount = hurtcount + 1;
+	if(hurtcount == 1){bbox.style.background = "#f7e4e6";text.innerHTML ="Ouch!";}
+	if(hurtcount == 2){bbox.style.background = "#f5cbce";text.innerHTML ="Stop that!";}
+	if(hurtcount == 3){bbox.style.background = "#f3b1b6";text.innerHTML ="Uhm, that hurts.";}
+	if(hurtcount == 4){bbox.style.background = "#f1989f";text.innerHTML ="Can you get back to the game now?";}
+	if(hurtcount == 5){bbox.style.background = "#ef7f87";text.innerHTML ="Please?";}
+	if(hurtcount == 6){bbox.style.background = "#ed656f";text.innerHTML ="Okay that's it.";bbox.className = "box shake shake-constant";}
+	if(hurtcount == 7){bbox.style.background = "#eb4c58";text.innerHTML ="Stop this now.";bbox.className = "box shake-hard shake-constant";}
+	if(hurtcount == 8){bbox.style.background = "#e93240";text.innerHTML ="I mean it.";bbox.className = "box shake-crazy shake-constant";}
+	if(hurtcount == 9){bbox.style.background = "#e71928";text.innerHTML ="You can't just do this because you suck at this game.";bbox.className = "box shake-crazy shake-opacity shake-constant";}
+	if(hurtcount == 10){
+		bbox.className = "box shake-freeze";		
+		bbox.style.background = "#e50011";text.innerHTML ="...";
+		setTimeout(bigshake,2000);
+	}
+	
+	
+}
 
+function bigshake(){
+	
+		container.className = "shake shake-constant shake-hard";
+		setTimeout(explode,2000);
+}
 
+function explode(){
+		container.style.visibility = "hidden";
+		body.style.background ="#000";
+		setTimeout(100,alert("You win."));
+}
 
-
-
-
+function textclick(text){
+	location.reload();
+}
