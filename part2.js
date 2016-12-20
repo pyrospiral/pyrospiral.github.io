@@ -315,7 +315,10 @@ function explode(){
 		container.style.visibility = "hidden";
 		body.style.background ="#000";
 		setTimeout(100,alert("You win."));
+		location.replace('https://www.youtube.com/watch?v=kfVsfOSbJY0');
+
 }
+
 
 function textclick(text){
 	location.reload();
