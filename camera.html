@@ -9,12 +9,6 @@ body {
     text-align: center;
 }
 
-#divimg{
-	 margin:auto;
-	 
-	 border:1px solid #333;
-}
-
 #header{
 	text-align:center;
 	margin:auto;
@@ -33,7 +27,8 @@ body {
 	background:#434D56;
 }
 #display{
-
+	margin-bottom:20px;
+	text-align:center;
 }
 input[type='file'] {
   color: transparent;
@@ -55,8 +50,23 @@ input[type='file'] {
   
 }
 
+#divimg{
+	 margin:auto;
+	 height:400px;
+	 width:30%;
+	 background:#434D56;
+	 border: 3px dashed #ddd;
+	 border-radius:5px;
+	 color:#ddd;
+}
+
 #img{
-margin-left: auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	height:85%;
+	visibility:hidden;
+	width:95%;
+	margin-left: auto;
 	margin-right: auto;
 	display: block;
 }
@@ -69,17 +79,20 @@ margin-left: auto;
 Capture image 1.8 <br><br>
 </div>
 
+<div id="display"> 
+<div id="divimg"  >
+Upload Image
+<img id="img" src="#" alt="your image" height="100" width="100" />
+</div>
+</div>
+
 <div id="picker">
 <span class="select-wrapper">
 <input type="file" id="file" accept="image/*" capture="camera" />
 </span>
 </div> 
   
-<div id="display"> 
-<div id="divimg"  >
-<img id="img" src="#" alt="your image" height="100" width="100" />
-</div>
-</div>
+
 
 
 <script>
