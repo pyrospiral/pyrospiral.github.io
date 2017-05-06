@@ -1,323 +1,101 @@
-<!DOCTYPE html>
 <html>
-	
-	<head>
-		<title>Face Recognition using CNN </title>
-		<link href="bootstrap.min.css" rel="stylesheet">
-		<link href="index.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="bootstrap.min.js"></script>
-		<script>
-			$(window).scroll(function () {
-			  var s = $(window).scrollTop(),
-					d = $(document).height(),
-					c = $(window).height();
-					scrollPercent = (s / (d-c)) * 100;
-					var position = scrollPercent+'%';
+  
+<head>
 
-			   //$("#progressbar").attr('width', position);
-			   $("#progressbar").css('width', position);
-			   console.log(position);
+<style>
 
-			});
-		</script>
-	</head>
-	
-	
-	
-	
-	<body>
-	
-		<div id="wrapper">
-		
-		<div id="progressb" class="progress">
-			<div id="progressbar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-			<span class="sr-only">40% Complete (success)</span>
-			</div>
-		</div>
-		
-		<div class="container">
+body {
+    margin: 0;
+    text-align: center;
+}
 
-		
-		<h1 style="margin-top:30px; text-align:center;" >Face Recognition using Deep Convolutional Neural Networks <small>Implementation in python - nolearn.lasagne</small></h1>
-		
-		<div id="bytext"> By Kushagra Chauhan under mentorship of Sudhir Rai </div>
-		
-		<div  id="contentlist">
-		
-			<h4 style="padding-left:80px">Contents:</h4>
-			
-			<div class="list-group">
-			  
-			  <a href="#problem" class="list-group-item">1. Problem statement</a>
-			  <a href="#dataset" class="list-group-item">2. Dataset collection</a>
-			  <a href="#approach" class="list-group-item">3. Approach</a>
-			  <a href="#implement" class="list-group-item">4. Implementation</a>
-			  <a href="#result" class="list-group-item">5. Results</a>
-			  <a href="#issues" class="list-group-item">6. Issues and Enhancement</a>
-			</div>		
-			
-		
-		</div>		
-		
-		
-		<div id="problem" class="content">
-		
-			<h3 class="contenthead">Problem Statement</h3>
-		
-			<div class="contentblock">
-			
-			<p class="contenttext">
-				 To implement an end to end Convolutional Neural Network based deep network for face recognition with an approach inspired by the paper <a href="https://www.robots.ox.ac.uk/~vgg/publications/2015/Parkhi15/parkhi15.pdf">Parkhi, Vedaldi and Zisserman - Deep Face Recognition</a> 
-			
-			</p>
-			
-			</div>
-		
-		</div>
-		
-		
-		<div id="dataset" class="content">
-		
-			<h3 class="contenthead">Dataset Collection</h3>
-		
-			<div class="contentblock">
-			
-			<p class="contenttext">
-				For this implementation we use the LFW(Labeled faces in the wild) database, a database of face photographs designed for studying the problem of unconstrained face recognition. The data set contains more than 13,000 images of faces collected from the web. Each face has been labeled with the name of the person pictured. 1680 of the people pictured have two or more distinct photos in the data set. The dataset is open sourced and freely available. For our project we constrain the dataset to people having at least 4 images each.
-			
-			</p>
-			
-			</div>
-		
-		</div>
-		
-		
-		<div id="approach" class="content">
-		
-			<h3 class="contenthead">Approach</h3>
-		
-			<div class="contentblock">
-			
-				<p class="contenttext">
-				
-					Deep neural networks have shown to be able to produce better results as compared to "shallow" neural networks, but a standard fully connected deep neural network increased in computation and complexity while also facing the vanishing gradient effect. Several modifications were made to the standard network model and convolutional neural networks came out on top for the aim of image recognition and classification.
-				
-					<br><br>
-				
-					<b>Convolutional neural networks (CNN)</b> have shown unprecedented success in the area of image recognition and computer vision. A CNN is a type of feed-forward artificial neural network where the individual neurons are tiled in such a way that they respond to overlapping regions in the visual field; and have their design based around the biological visual mechanism in living organisms.
-					<br><br>
-					A deep CNN is a variant of a multi layered perceptron with a few different key features:
-					<ul>
-					<li><b>1. 3D volume of neurons :</b> Convolutional Neural Networks take advantage of the fact that the input consists of images and they constrain the architecture in a more sensible way. In particular, unlike a regular Neural Network, the layers of a ConvNet have neurons arranged in 3 dimensions: width, height, depth.
-					<br><br>
-					<li><b>2. Local Connectivity:</b> CNNs exploit spatially local correlation by enforcing a local connectivity pattern between neurons of adjacent layers. The architecture thus ensures that the learnt "filters" produce the strongest response to a spatially local input pattern. Stacking many such layers leads to non-linear "filters" that become increasingly "global" (i.e. responsive to a larger region of pixel space). This allows the network to first create good representations of small parts of the input, then assemble representations of larger areas from them.
-					<br><br>
-					<li><b>3. Shared weights:</b> In CNNs, each filter is replicated across the entire visual field. These replicated units share the same parameterization (weight vector and bias) and form a feature map.
-					<br><br>
-					</ul>
-					The network architecture contains 8 convolution layers, each followed by a max-pooling layer. An additional 3 fully connected layers act as a MLP classifier which can be thought of as convolution layers having filters that are the same size as the image. The image below shows the details of each layers.
-					
-							
-					
-				</p>
-				
-				<div class="contentimage">
-				
-					<img src="https://raw.githubusercontent.com/pyrospiral/pyrospiral.github.io/master/images/layers.PNG"></img>
-				
-				</div>
-			
-				<p class="contenttext">
-				
-				The function of <b>convolution layers</b> can be thought of as compressors that learn to extract only the most useful information from the previous layer.
-				<br>
-				A <b>max pooling layer</b> is used to decrease the dimensionality of the layers by down-sampling. This helps in reducing computation for upper layers and provides a form of translation invariance.
-				<br>
-				A <b>ReLU layer</b> is just a layer of Rectified Linear Units which act as activation units.
-				<br><br>
-				
-				The input to the network is either a 250x250 image with 62500 input neurons or a 220x220 image obtained by cropping the original image for <b>data augmentation</b> with 48400 input neurons.
-				<br>
-				Data augmentation is also obtained by flipping the image, this helps in increasing the size of the dataset 
-				without needing more images.
-				<br><br>
-				The images are also transformed into grayscale to reduce the number of channels from three to one as this introduces <b>lighting and color invariance</b>.
-				<br><br>
-				The output layer then contains <b>n</b> number of neurons which correspond to the dataset size; the number of faces to be classified.
-				</p>
-			
-			</div>
-		</div>
-		
-		
-		<div id="implement" class="content">
-		
-			<h3 class="contenthead">Implementation</h3>
-		
-			<div class="contentblock">
-			
-			<p class="contenttext">
-				 The implementation is done in python using the <b>nolearn</b> library which is a thin wrapper over the library <b>lasagne</b> which further extends as a wrapper over <b>theano</b>.
-				 <br>Lasagne.nolearn offers an optimization through fast C compilation and is magnitudes faster than other python implementations. It also <b>supports CUDA</b> without any change in code for GPU usage.
-				 
-			</p>
-			
-			<p class="contentcode">
-				We create the network model as followed. This is an example shallower network but can be easily expanded in the same fashion by specifying more layers and the corresponding parameters.
-				
-				<pre class="code">
-net = NeuralNet(
-layers=[
-	('input', layers.InputLayer),
-	('conv1', Conv2DLayer),
-	('pool1', MaxPool2DLayer),
-	('dropout1', layers.DropoutLayer),
-	('conv2', Conv2DLayer),
-	('pool2', MaxPool2DLayer),
-	('dropout2', layers.DropoutLayer),
-	('conv3', Conv2DLayer),
-	('pool3', MaxPool2DLayer),
-	('dropout3', layers.DropoutLayer),
-	('hidden4', layers.DenseLayer),
-	('dropout4', layers.DropoutLayer),
-	('hidden5', layers.DenseLayer),
-	('output', layers.DenseLayer),
-	],
-input_shape=(None, 1, 250, 250),
-conv1_num_filters=32, conv1_filter_size=(3, 3),
-pool1_pool_size=(2, 2),
-dropout1_p=0.1,
+#divimg{
+	 margin:auto;
+	 
+	 border:1px solid #333;
+}
 
-conv2_num_filters=64, conv2_filter_size=(2, 2),
-pool2_pool_size=(2, 2),
-dropout2_p=0.2,
+#header{
+	text-align:center;
+	margin:auto;
+	padding:10px;
+	color:#ddd;
+	margin-bottom:20px;
+	background:#434D56;
+}
+#picker{
+	text-align:center;
+	width:10%;
+	padding:10px;
+	margin:auto;
+	margin-bottom:20px;
+	border-radius: 5px;
+	background:#434D56;
+}
+#display{
 
-conv3_num_filters=128, conv3_filter_size=(2, 2),
-pool3_pool_size=(2, 2),
-dropout3_p=0.3,
+}
+input[type='file'] {
+  color: transparent;
+  size:20%;
+  height:50px;
+  opacity: 0;
+  cursor:pointer;
+  
+}
 
-hidden4_num_units=200,
-dropout4_p=0.5,
+.select-wrapper {
+  background: url(https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/01/app7.png) no-repeat;
+  background-size: cover;
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin:auto;
+  
+}
 
-hidden5_num_units=200,
-output_num_units=12,
-output_nonlinearity=nonlinearities.softmax,
+#img{
+margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+</style>
 
-update_learning_rate=theano.shared(float32(0.05)),
-update_momentum=theano.shared(float32(0.4)),
 
-regression=False,
-batch_iterator_train=PyroBatchIterator(batch_size=50),
-max_epochs=200,
-verbose=1,
-eval_size = 0.2
-)				
-				</pre>
-			
-				Here we define the input layer, the hidden layer and the output layer. In parameter layers, we name and specify the type of each layer, and their order. Parameters input_shape, hidden_num_units, output_nonlinearity, and output_num_units are each parameters for specific layers; they refer to the layer by their prefix, such that input_shape defines the shape parameter of the input layer, hidden_num_units defines the hidden layer's num_units and so on. <br><br>
-				
-				Since our problem deals with classification, we set regression to false and use softmax as the non-linearity function. The update_learning_rate should be remembered to kept small if the number of faces to classify is fairly small as the gradient descent can easily overshoot, the update_momentum is also kept at a moderate value, but increasing it can lead to faster learning. The eval_size specifies the fraction of data that will be utilized for cross validation, in our case it is 20%.<br><br>
-					
-				In our initialization of the network we didn't specify an objective function to minimize. The default for that is the cross-entropy loss fucntion, but can be explicitly specified as a function. We have not used the <b>triplet error</b> specified in the paper due to reasons specified later on.<br><br>
-				
-				batch_iterator_train can be set to a custom iterator function which can feed data as specified by the batch iteration function.<br>
-				
-				<pre class="code">
-class PyroBatchIterator(BatchIterator):
-    
+</head>
+<body>
+<div id="header">  
+Capture image 1.8 <br><br>
+</div>
 
-	def imageaugment(self, Xb, yb):
-		Xb, yb = super(PyroBatchIterator, self).transform(Xb, yb)
-		
-		# Flip half of the images in this batch at random:
-		choicevariable = np.random.choice(bs, bs / 2, replace=False)
-		Xb = flipImage(Xb,choicevariable)
-		# Randomly crop the 250x250 images to 220x220 image
-		Xb = cropImage(Xb,220)
-		
+<div id="picker">
+<span class="select-wrapper">
+<input type="file" id="file" accept="image/*" capture="camera" />
+</span>
+</div> 
+  
+<div id="display"> 
+<div id="divimg"  >
+<img id="img" src="#" alt="your image" height="100" width="100" />
+</div>
+</div>
 
-		return Xb, yb
-				</pre>
-				
-				Here we feed the iterator augmented images in specified mini-batch sizes.<br><br>
-				
-				
-				We have included additional <b>dropout layers</b> which are a crucial part for regularization, this is necessary for a larger scale implementation but only makes sense to use when overfitting occurs.
-			</p>
-			
-			</div>
-		
-		</div>
-		
-		
-		<div id="result" class="content">
-		
-			<h3 class="contenthead">Results</h3>
-		
-			<div class="contentblock">
-			
-			<p class="contenttext">
-				 
-				The code implementation was scaled down to a limited dataset size of 200 images and the network was also made shallower due to reasons explained in the next section. With these constraints the network showed a final validation accuracy value of <b>92%</b>.
-				<br><br>
-				On running the network, following was the progression of validation and training loss.
-				<br><br>
-				<pre class="code">
- Epoch  |  Train loss  |  Valid loss  |  
---------|--------------|--------------|
-     1  |    0.011763  |    0.042740  |
-     2  |    0.018500  |    0.009413  | 
-     3  |    0.018598  |    0.007918  |
-     4  |    0.007292  |    0.017284  | 
-     5  |    0.007783  |    0.007841  |
-...
-   50  |    0.002791  |    0.002913  | 
-   51  |    0.002789  |    0.002911  | 
-   52  |    0.002786  |    0.002909  |
-   53  |    0.002783  |    0.002907  |
-   54  |    0.002780  |    0.002904  |
-   55  |    0.002777  |    0.002902  | 
-...
-   95  |    0.002183  |    0.003338  |
-   96  |    0.002172  |    0.003337  |
-   97  |    0.002161  |    0.003337  |
-   98  |    0.002140  |    0.003337  |
-   99  |    0.002130  |    0.003337  |
-  100  |    0.002179  |    0.003336  |
-				</pre>
-				The variation of losses though the epochs is shown in the graph below.
-				<br><br>
-				<img src="https://raw.githubusercontent.com/pyrospiral/pyrospiral.github.io/master/images/losses.png"></img>
-			</p>
-			
-			</div>
-		
-		</div>
-		
-		<div id="issues" class="content">
-		
-			<h3 class="contenthead">Issues and Enhancements</h3>
-		
-			<div class="contentblock">
-			
-			<p class="contenttext">
-				 
-				The implementation in the paper is aided by a good hardware setup including 4 GPUs which can handle a much larger dataset and reduce training time by a whole magnitude. Despite 10 hours of run time, our network could not iterate though more than 150 epochs which is insufficient for proper learning at the given scale. Due to memory constraints, the network also had to be made shallower, further depreciating the accuracy.
-				<br><br>The architecutre in the paper involves an ensemble of networks working together instead of a single network, and also uses the triplet loss method which requires a <b>siamese network</b> or an extension of it. The utilization of this loss function also provided a boost to the paper's network accuracy.
-				
-				<br><br>
-				For the reasons above, stronger hardware support would greately improve the network strength and due to the use of nolearn library, this would require no change in the code itself. <br>
-				Aside from this, the paper mentions no measure to tackle overfitting other than l2 regularization. Our network also employs dropout layers in the network which are increasing essential for larger scale networks for reducting overfitting.
-			
-			</p>
-			
-			</div>
-		
-		</div>
-		
-		
-	</body>
 
-	
+<script>
+ 
+    function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("file").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("img").src = oFREvent.target.result;
+            document.getElementById("img").style.visibility = 'visible';
+        };
+    };
+
+  document.getElementById('file').addEventListener('change', PreviewImage, false);
+</script>
+</body>
+  
 </html>
