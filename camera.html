@@ -1,15 +1,79 @@
 <html>
   
+<head>
 
+<style>
+
+#divimg{
+	visibility:hidden;
+	 margin:auto;
+}
+
+#header{
+	border: 1px solid #333;
+	text-align:center;
+	margin:auto;
+	padding:10px;
+	margin-bottom:20px;
+}
+#picker{
+	border: 1px solid #333;
+	text-align:center;
+	width:30%;
+	padding:10px;
+	margin:auto;
+	margin-bottom:20px;
+}
+#display{
+	border: 1px solid #333;
+}
+input[type='file'] {
+  color: transparent;
+  size:20%;
+  height:50px;
+  opacity: 0;
   
-Capture image 1.8
+}
+
+.select-wrapper {
+  background: url(http://s10.postimg.org/4rc0fv8jt/camera.png) no-repeat;
+  background-size: cover;
+  display: block;
+  position: relative;
+  width: 60px;
+  height: 40px;
+  margin:auto;
+  
+}
+
+#img{
+margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+</style>
 
 
+</head>
+
+<div id="header">  
+Capture image 2.1 <br><br>
+</div>
+
+<div id="picker">
+<span class="select-wrapper">
 <input type="file" id="file" accept="image/*" capture="camera" />
+</span>
+</div> 
   
-<output id="list"></output>
-  <img id="img" src="#" alt="your image" />
- <script>
+<div id="display"> 
+<div id="divimg"  >
+<img id="img" src="#" alt="your image" height="100" width="100" />
+</div>
+</div>
+
+
+<script>
  
     function PreviewImage() {
         var oFReader = new FileReader();
@@ -17,6 +81,7 @@ Capture image 1.8
 
         oFReader.onload = function (oFREvent) {
             document.getElementById("img").src = oFREvent.target.result;
+            document.getElementById("img").style.visibility = 'visible';
         };
     };
 
