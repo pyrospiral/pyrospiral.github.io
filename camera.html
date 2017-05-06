@@ -1,6 +1,12 @@
 <html>
-Capture image 1.2
-<script>
+Capture image 1.4
+
+
+<input type="file" id="file" accept="image/*" capture="camera" />
+  
+<output id="list"></output>
+  
+ <script>
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
@@ -17,12 +23,6 @@ Capture image 1.2
 
   document.getElementById('file').addEventListener('change', handleFileSelect, false);
 </script>
-
-<input type="file" id="file" accept="image/*" capture="camera" />
-  
-<output id="list"></output>
-  
- 
   
   
 </html>
