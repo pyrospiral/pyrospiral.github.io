@@ -4,44 +4,53 @@
 
 <style>
 
+body {
+    margin: 0;
+    text-align: center;
+}
+
 #divimg{
-	visibility:hidden;
 	 margin:auto;
+	 
+	 border:1px solid #333;
 }
 
 #header{
-	border: 1px solid #333;
 	text-align:center;
 	margin:auto;
 	padding:10px;
+	color:#ddd;
 	margin-bottom:20px;
+	background:#434D56;
 }
 #picker{
-	border: 1px solid #333;
 	text-align:center;
-	width:30%;
+	width:10%;
 	padding:10px;
 	margin:auto;
 	margin-bottom:20px;
+	border-radius: 5px;
+	background:#434D56;
 }
 #display{
-	border: 1px solid #333;
+
 }
 input[type='file'] {
   color: transparent;
   size:20%;
   height:50px;
   opacity: 0;
+  cursor:pointer;
   
 }
 
 .select-wrapper {
-  background: url(http://s10.postimg.org/4rc0fv8jt/camera.png) no-repeat;
+  background: url(https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/01/app7.png) no-repeat;
   background-size: cover;
   display: block;
   position: relative;
-  width: 60px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   margin:auto;
   
 }
@@ -55,9 +64,9 @@ margin-left: auto;
 
 
 </head>
-
+<body>
 <div id="header">  
-Capture image 2.1 <br><br>
+Capture image 1.8 <br><br>
 </div>
 
 <div id="picker">
@@ -87,6 +96,6 @@ Capture image 2.1 <br><br>
 
   document.getElementById('file').addEventListener('change', PreviewImage, false);
 </script>
-  
+</body>
   
 </html>
